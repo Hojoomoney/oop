@@ -6,8 +6,7 @@ import model.MemberDto;
 import java.util.Scanner;
 
 public class JoinView {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(Scanner sc) {
 
         System.out.println("ID, 비번, 비번확인, 이름, 주민번호, 전화번호, 주소, 직업을 순서대로 입력하세요.");
         MemberDto member = new MemberBuilder()

@@ -12,11 +12,11 @@ import serviceImpl.UtilServiceImpl;
 import java.util.Scanner;
 
 public class GradeView {
-    public static void main(String[] args) {
+    public static void main(Scanner sc) {
         System.out.println("다음은 한 학생의 과목 점수이다. ");
 
-        Scanner sc = new Scanner(System.in);
         UtilService util = UtilServiceImpl.getInstance();
+        System.out.println("이름을 입력하세요 : ");
         MemberDto student = new MemberBuilder()
                         .name(sc.next())
                         .build();
