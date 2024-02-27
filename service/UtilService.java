@@ -8,4 +8,5 @@ public interface UtilService {
     String createRandomTitle();
     String createRandomContent();
     String createRandomCompany();
+    String createRandomUsername();
 }

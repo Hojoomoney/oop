@@ -1,6 +1,7 @@
 package model;
 
 public class SubjectDto {
+    private int id;
     private int koreanScore;
     private int englishScore;
     private int mathScore;
