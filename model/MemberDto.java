@@ -114,14 +114,11 @@ public class MemberDto {
         return "MemberDto{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", confirmPassword='" + confirmPassword + '\'' +
                 ", name='" + name + '\'' +
                 ", regNumber='" + regNumber + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +
                 ", job='" + job + '\'' +
-                ", height=" + height +
-                ", weight=" + weight +
                 '}';
     }
 }

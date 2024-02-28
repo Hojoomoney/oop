@@ -81,4 +81,12 @@ public class UtilServiceImpl implements UtilService {
         return username;
     }
 
+    @Override
+    public String createRandomJob() {
+        String job[] = {"교사","운동선수","배우","가수","엔지니어",
+                        "기사","기자","의사","변호사","판사",
+                        "농부","소방관","경찰관","간호사"};
+        return job[createRandomInteger(0,13)];
+    }
+
 }

@@ -7,12 +7,17 @@ import java.util.List;
 
 public interface MemberService {
     String join(MemberDto member);
-    String login(MemberDto member);
-    MemberDto findUserById(String username);
-    void updatePassword(MemberDto member);
-    String deleteUser(String username);
     List<MemberDto> getUserList();
-    List<MemberDto> findUsersByName(String name);
-    List<MemberDto> findUsersByJob(String job);
-    int countUsers();
+    String countUsers();
+    String addUsers();
+    String findUser(String username);
+    String login(MemberDto member);
+
+    String findUsersByName(String name);
+
+    String changePassword(String username, String password);
+
+    String delete(String username, String password);
+
+    String findUsersByJob(String next);
 }

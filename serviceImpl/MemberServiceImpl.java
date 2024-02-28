@@ -1,53 +1,138 @@
 package serviceImpl;
 
+import builder.MemberBuilder;
 import model.MemberDto;
 import service.MemberService;
+import service.UtilService;
 
-import java.util.List;
+import java.util.*;
 
 public class MemberServiceImpl implements MemberService {
+    private static MemberService instance = new MemberServiceImpl();
+    Map<String, MemberDto> members;
+
+    public MemberServiceImpl() {
+        this.members = new HashMap<>();
+    }
+    public static MemberService getInstance(){
+        return instance;
+    }
+
     @Override
     public String join(MemberDto member) {
-        return null;
-    }
-
-    @Override
-    public String login(MemberDto member) {
-        return null;
-    }
-
-    @Override
-    public MemberDto findUserById(String username) {
-        return null;
-    }
-
-    @Override
-    public void updatePassword(MemberDto member) {
-
-    }
-
-    @Override
-    public String deleteUser(String username) {
-        return null;
+        members.put(member.getUsername(),member);
+        return "회원가입 성공";
     }
 
     @Override
     public List<MemberDto> getUserList() {
+        List<MemberDto> memberList = new ArrayList<>();
+        members.forEach((k,v) ->{
+            memberList.add(v);
+        });
+        memberList.forEach(i ->{
+            System.out.println(i);
+        });
         return null;
+    }
+    @Override
+    public String countUsers() {
+        return "회원 수 : " + members.size();
     }
 
     @Override
-    public List<MemberDto> findUsersByName(String name) {
-        return null;
+    public String addUsers() {
+        UtilService util = UtilServiceImpl.getInstance();
+        for (int i = 0; i < 5; i++) {
+            String username = util.createRandomUsername();
+            members.put(username,
+                    new MemberBuilder()
+                            .username(username)
+                            .password("1")
+                            .confirmPassword("1")
+                            .name(util.createRandomName())
+                            .job(util.createRandomJob())
+                            .build());
+        }
+        return "더미데이터 삽입 성공";
     }
 
     @Override
-    public List<MemberDto> findUsersByJob(String job) {
-        return null;
+    public String findUser(String username) {
+         if(members.containsKey(username)){
+             System.out.println(members.get(username));;
+             return "입력하신 회원 정보 입니다.";
+         }
+         return "회원이 존재하지 않습니다.";
     }
 
     @Override
-    public int countUsers() {
-        return 0;
+    public String login(MemberDto input) {
+        MemberDto member = members.get(input.getUsername());
+        if(member == null){
+            return "회원정보가 없습니다.";
+        } else if(member.getPassword().equals(input.getPassword())){
+            return "로그인 성공";
+        } else {
+            return "패스워드가 일치하지 않습니다.";
+        }
+    }
+
+    @Override
+    public String findUsersByName(String name) {
+        List<MemberDto> userList = new ArrayList<>();
+        members.forEach((k,v) -> {
+            if(v.getName().equals(name)){
+                userList.add(v);
+            }
+        });
+        if(userList.isEmpty()){
+            return "입력하신 이름과 일치하는 회원이 없습니다.";
+        } else {
+            userList.forEach(i -> {
+                System.out.println(i);
+            });
+            return "이름과 일치하는 회원 정보 출력";
+        }
+    }
+
+    @Override
+    public String changePassword(String username, String password) {
+        if(members.get(username) == null){
+            return "존재하지 않는 회원입니다.";
+        } else {
+            members.get(username).setPassword(password);
+            return "비밀번호 변경 완료";
+        }
+    }
+
+    @Override
+    public String delete(String username, String password) {
+        if(members.get(username) == null){
+            return "존재하지 않는 회원입니다.";
+        } else if(members.get(username).getPassword().equals(password)){
+            members.remove(username);
+            return "회원 탈퇴 완료";
+        } else {
+            return "비밀번호가 일치 하지 않습니다.";
+        }
+    }
+
+    @Override
+    public String findUsersByJob(String job) {
+        List<MemberDto> userList = new ArrayList<>();
+        members.forEach((k,v) -> {
+            if(v.getJob().equals(job)){
+                userList.add(v);
+            }
+        });
+        if(userList.isEmpty()){
+            return "입력하신 직업과 일치하는 회원이 없습니다.";
+        } else {
+            userList.forEach(i -> {
+                System.out.println(i);
+            });
+            return "직업과 일치하는 회원 정보 출력";
+        }
     }
 }
