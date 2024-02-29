@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            System.out.println("0-종료 1-회원관리 2-성적표 3-게시판 4-카우프 5-사용자관리(맵)");
+            System.out.println("0-종료 1-회원관리 2-성적표 3-게시판 4-카우프 5-사용자관리(맵) 6-은행관리");
             switch (sc.next()){
                 case "0" :
                     return;
@@ -26,6 +26,8 @@ public class Main {
                     break;
                 case "5" :
                     MemberView.main(sc);
+                case "6" :
+                    AccountView.main(sc);
             }
         }
     }
