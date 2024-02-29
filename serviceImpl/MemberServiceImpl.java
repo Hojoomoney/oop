@@ -26,14 +26,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public List<MemberDto> getUserList() {
-        List<MemberDto> memberList = new ArrayList<>();
-        members.forEach((k,v) ->{
-            memberList.add(v);
-        });
-        memberList.forEach(i ->{
-            System.out.println(i);
-        });
-        return null;
+        return new ArrayList<>(members.values());
     }
     @Override
     public String countUsers() {
@@ -58,12 +51,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String findUser(String username) {
-         if(members.containsKey(username)){
-             System.out.println(members.get(username));;
-             return "입력하신 회원 정보 입니다.";
-         }
-         return "회원이 존재하지 않습니다.";
+    public MemberDto findUser(String username) {
+        return members.get(username);
     }
 
     @Override
@@ -97,21 +86,21 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String changePassword(String username, String password) {
-        if(members.get(username) == null){
+    public String changePassword(MemberDto member) {
+        if(members.get(member.getUsername()) == null){
             return "존재하지 않는 회원입니다.";
         } else {
-            members.get(username).setPassword(password);
+            members.get(member.getUsername()).setPassword(member.getPassword());
             return "비밀번호 변경 완료";
         }
     }
 
     @Override
-    public String delete(String username, String password) {
-        if(members.get(username) == null){
+    public String delete(MemberDto member) {
+        if(members.get(member.getUsername()) == null){
             return "존재하지 않는 회원입니다.";
-        } else if(members.get(username).getPassword().equals(password)){
-            members.remove(username);
+        } else if(members.get(member.getUsername()).getPassword().equals(member.getPassword())){
+            members.remove(member.getUsername());
             return "회원 탈퇴 완료";
         } else {
             return "비밀번호가 일치 하지 않습니다.";

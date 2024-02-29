@@ -10,14 +10,14 @@ public interface MemberService {
     List<MemberDto> getUserList();
     String countUsers();
     String addUsers();
-    String findUser(String username);
+    MemberDto findUser(String username);
     String login(MemberDto member);
 
     String findUsersByName(String name);
 
-    String changePassword(String username, String password);
+    String changePassword(MemberDto member);
 
-    String delete(String username, String password);
+    String delete(MemberDto member);
 
     String findUsersByJob(String next);
 }

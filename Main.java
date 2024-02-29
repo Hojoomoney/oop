@@ -26,8 +26,10 @@ public class Main {
                     break;
                 case "5" :
                     MemberView.main(sc);
+                    break;
                 case "6" :
                     AccountView.main(sc);
+                    break;
             }
         }
     }

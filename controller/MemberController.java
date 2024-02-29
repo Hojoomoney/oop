@@ -1,6 +1,7 @@
 package controller;
 
 import builder.MemberBuilder;
+import model.MemberDto;
 import service.MemberService;
 import serviceImpl.MemberServiceImpl;
 
@@ -38,13 +39,12 @@ public class MemberController {
         String msg = MemberServiceImpl.getInstance().addUsers();
         return msg;
     }
-    public String findUser(Scanner scan){
+    public MemberDto findUser(Scanner scan){
         System.out.println("검색할 아이디를 입력하세요");
-        String msg = memberService.findUser(scan.next());
-        return msg;
+        return memberService.findUser(scan.next());
     }
-    public void getUserList(){
-        memberService.getUserList();
+    public List<MemberDto> getUserList(){
+        return memberService.getUserList();
     }
     public String countUsers(){
         return memberService.countUsers();
@@ -56,13 +56,19 @@ public class MemberController {
 
     public String changePassword(Scanner sc) {
         System.out.println("현재 아이디와 변경할 비밀번호를 입력해주세요.");
-        String msg = memberService.changePassword(sc.next(),sc.next());
+        String msg = memberService.changePassword(new MemberBuilder()
+                                                    .username(sc.next())
+                                                    .password(sc.next())
+                                                    .build());
         return msg;
     }
 
     public String delete(Scanner sc) {
         System.out.println("탈퇴하실 회원정보의 아이디와 비밀번호를 입력해주세요.");
-        String msg = memberService.delete(sc.next(),sc.next());
+        String msg = memberService.delete(new MemberBuilder()
+                                                .username(sc.next())
+                                                .password(sc.next())
+                                                .build());
         return msg;
     }
 

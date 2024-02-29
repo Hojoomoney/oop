@@ -2,7 +2,8 @@ package model;
 
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -13,5 +14,5 @@ public class AccountDto {
     private String accountNumber;
     private String accountHolder;
     private double balance;
-    private Date transactionDate;
+    private LocalDateTime transactionDate;
 }

@@ -38,7 +38,9 @@ public class MemberView {
                     System.out.println(ctrl.delete(sc));
                     break;
                 case "6" :
-                    ctrl.getUserList();
+                    ctrl.getUserList().forEach(i -> {
+                        System.out.println(i);
+                    });
                     break;
                 case "7" :
                     System.out.println(ctrl.findUsersByName(sc));
