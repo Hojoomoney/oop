@@ -1,10 +1,8 @@
 package controller;
 
-import model.MemberDto;
 import service.AuthService;
 import serviceImpl.AuthServiceImpl;
 
-import java.util.Map;
 import java.util.Scanner;
 
 public class AuthController{

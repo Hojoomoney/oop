@@ -1,23 +1,23 @@
 package service;
 
-import model.MemberDto;
+import model.Member;
 
 import java.util.List;
 
 
 public interface MemberService {
-    String join(MemberDto member);
-    List<MemberDto> getUserList();
+    String join(Member member);
+    List<Member> getUserList();
     String countUsers();
     String addUsers();
-    MemberDto findUser(String username);
-    String login(MemberDto member);
+    Member findUser(String username);
+    String login(Member member);
 
     String findUsersByName(String name);
 
-    String changePassword(MemberDto member);
+    String changePassword(Member member);
 
-    String delete(MemberDto member);
+    String delete(Member member);
 
     String findUsersByJob(String next);
 }

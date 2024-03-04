@@ -1,20 +1,19 @@
 package serviceImpl;
 
-import builder.MemberBuilder;
-import model.MemberDto;
+import model.Member;
 import service.AuthService;
 import service.UtilService;
 
-import java.lang.reflect.Member;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class AuthServiceImpl implements AuthService {
     private static AuthService instance = new AuthServiceImpl();
-    Map<String, MemberDto> users;
+    Map<String, Member> users;
+    List<Member> memberList;
+
     private AuthServiceImpl(){
         this.users = new HashMap<>();
+        this.memberList = new ArrayList<>();
     }
     public static AuthService getInstance(){
         return instance;
@@ -23,7 +22,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String join(Scanner sc) {
         System.out.println("ID, 비번, 비번확인, 이름, 주민번호, 전화번호, 주소, 직업을 순서대로 입력하세요.");
-        MemberDto member = new MemberBuilder()
+        Member member = Member.builder()
                 .username(sc.next())
                 .password(sc.next())
                 .confirmPassword(sc.next())
@@ -47,7 +46,7 @@ public class AuthServiceImpl implements AuthService {
         for (int i = 0; i < 5; i++) {
             String username = util.createRandomUsername();
             users.put(username,
-                    new MemberBuilder()
+                    Member.builder()
                             .username(username)
                             .password("1")
                             .confirmPassword("1")
@@ -58,13 +57,13 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public MemberDto findUsers(String username) {
-        MemberDto member = new MemberBuilder().build();
+    public Member findUsers(String username) {
+        Member member = Member.builder().build();
         return member;
     }
 
     @Override
-    public Map<String, MemberDto> getUserMap() {
+    public Map<String, Member> getUserMap() {
         users.forEach((k,v) -> {
             System.out.println("{" + k + "," + v + "}.");
         });

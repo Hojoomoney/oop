@@ -1,7 +1,6 @@
 package serviceImpl;
 
-import builder.MemberBuilder;
-import model.MemberDto;
+import model.Member;
 import service.MemberService;
 import service.UtilService;
 
@@ -9,7 +8,7 @@ import java.util.*;
 
 public class MemberServiceImpl implements MemberService {
     private static MemberService instance = new MemberServiceImpl();
-    Map<String, MemberDto> members;
+    Map<String, Member> members;
 
     public MemberServiceImpl() {
         this.members = new HashMap<>();
@@ -19,13 +18,13 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String join(MemberDto member) {
+    public String join(Member member) {
         members.put(member.getUsername(),member);
         return "회원가입 성공";
     }
 
     @Override
-    public List<MemberDto> getUserList() {
+    public List<Member> getUserList() {
         return new ArrayList<>(members.values());
     }
     @Override
@@ -39,7 +38,7 @@ public class MemberServiceImpl implements MemberService {
         for (int i = 0; i < 5; i++) {
             String username = util.createRandomUsername();
             members.put(username,
-                    new MemberBuilder()
+                    Member.builder()
                             .username(username)
                             .password("1")
                             .confirmPassword("1")
@@ -51,13 +50,13 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberDto findUser(String username) {
+    public Member findUser(String username) {
         return members.get(username);
     }
 
     @Override
-    public String login(MemberDto input) {
-        MemberDto member = members.get(input.getUsername());
+    public String login(Member input) {
+        Member member = members.get(input.getUsername());
         if(member == null){
             return "회원정보가 없습니다.";
         } else if(member.getPassword().equals(input.getPassword())){
@@ -69,7 +68,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public String findUsersByName(String name) {
-        List<MemberDto> userList = new ArrayList<>();
+        List<Member> userList = new ArrayList<>();
         members.forEach((k,v) -> {
             if(v.getName().equals(name)){
                 userList.add(v);
@@ -86,7 +85,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String changePassword(MemberDto member) {
+    public String changePassword(Member member) {
         if(members.get(member.getUsername()) == null){
             return "존재하지 않는 회원입니다.";
         } else {
@@ -96,7 +95,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String delete(MemberDto member) {
+    public String delete(Member member) {
         if(members.get(member.getUsername()) == null){
             return "존재하지 않는 회원입니다.";
         } else if(members.get(member.getUsername()).getPassword().equals(member.getPassword())){
@@ -109,7 +108,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public String findUsersByJob(String job) {
-        List<MemberDto> userList = new ArrayList<>();
+        List<Member> userList = new ArrayList<>();
         members.forEach((k,v) -> {
             if(v.getJob().equals(job)){
                 userList.add(v);

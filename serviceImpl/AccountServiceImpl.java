@@ -1,6 +1,6 @@
 package serviceImpl;
 
-import model.AccountDto;
+import model.Account;
 import service.AccountService;
 
 import java.time.LocalDateTime;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class AccountServiceImpl implements AccountService {
     private static AccountService instance = new AccountServiceImpl();
-    List<AccountDto> accounts;
+    List<Account> accounts;
 
     public static AccountService getInstance() {
         return instance;
@@ -19,38 +19,38 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public String createAccount(AccountDto account) {
+    public String createAccount(Account account) {
         accounts.add(account);
         return "계좌생성 완료";
     }
 
     @Override
-    public String deposit(AccountDto account) {
-        accounts.forEach(i -> {
-            if (i.getAccountNumber().equals(account.getAccountNumber())){
-                i.setBalance(i.getBalance() + account.getBalance());
-                i.setTransactionDate(LocalDateTime.now());
-            }
-        });
+    public String deposit(Account account) {
+//        accounts.forEach(i -> {
+//            if (i.getAccountNumber().equals(account.getAccountNumber())){
+//                i.setBalance(i.getBalance() + account.getBalance());
+//                i.setTransactionDate(LocalDateTime.now());
+//            }
+//        });
         return "계좌 송금 성공";
     }
 
     @Override
-    public String withdraw(AccountDto account) {
-        accounts.forEach(i -> {
-            if (i.getAccountNumber().equals(account.getAccountNumber())){
-                i.setBalance(i.getBalance() - account.getBalance());
-                i.setTransactionDate(LocalDateTime.now());
-            }
-        });
-        accounts.stream().filter(i -> i.getAccountNumber().equals(account.getAccountNumber()))
-                .forEach(i -> {
-                    if(i.getBalance() >= account.getBalance()){
-                        i.setBalance(i.getBalance() - account.getBalance());
-                        i.setTransactionDate(LocalDateTime.now());
-                    } else {
-                    }
-                });
+    public String withdraw(Account account) {
+//        accounts.forEach(i -> {
+//            if (i.getAccountNumber().equals(account.getAccountNumber())){
+//                i.setBalance(i.getBalance() - account.getBalance());
+//                i.setTransactionDate(LocalDateTime.now());
+//            }
+//        });
+//        accounts.stream().filter(i -> i.getAccountNumber().equals(account.getAccountNumber()))
+//                .forEach(i -> {
+//                    if(i.getBalance() >= account.getBalance()){
+//                        i.setBalance(i.getBalance() - account.getBalance());
+//                        i.setTransactionDate(LocalDateTime.now());
+//                    } else {
+//                    }
+//                });
         return "계좌 출금 성공";
     }
 
@@ -66,7 +66,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<AccountDto> getAccount() {
+    public List<Account> getAccount() {
         return accounts;
     }
 }

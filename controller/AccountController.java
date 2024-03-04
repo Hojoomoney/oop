@@ -1,7 +1,6 @@
 package controller;
 
-import builder.AccountBuilder;
-import model.AccountDto;
+import model.Account;
 import service.AccountService;
 import serviceImpl.AccountServiceImpl;
 
@@ -19,7 +18,7 @@ public class AccountController{
 
     public String createAccount(Scanner scan) {
         System.out.println("계좌번호, 예금주를 입력하시오.");
-        return accountService.createAccount(new AccountBuilder()
+        return accountService.createAccount(Account.builder()
                                             .id(scan.nextLong())
                                             .accountNumber(scan.next())
                                             .accountHolder(scan.next())
@@ -29,7 +28,7 @@ public class AccountController{
 
     public String deposit(Scanner scan) {
         System.out.println("계좌번호와 송금할 금액을 입력하시오.");
-        return accountService.deposit(new AccountBuilder()
+        return accountService.deposit(Account.builder()
                                         .accountNumber(scan.next())
                                         .balance(scan.nextDouble())
                                         .transactionDate(LocalDateTime.now())
@@ -38,7 +37,7 @@ public class AccountController{
 
     public String withdraw(Scanner scan) {
         System.out.println("계좌번호와 출금할 금액을 입력하시오.");
-        return accountService.withdraw(new AccountBuilder()
+        return accountService.withdraw(Account.builder()
                                         .accountNumber(scan.next())
                                         .balance(scan.nextDouble())
                                         .transactionDate(LocalDateTime.now())
@@ -54,7 +53,7 @@ public class AccountController{
         return accountService.cancelAccount(scan.next());
     }
 
-    public List<AccountDto> getAccount() {
+    public List<Account> getAccount() {
         return accountService.getAccount();
     }
 }
