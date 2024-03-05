@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MemberService {
     String join(Member member);
-    List<Member> getUserList();
+    List<?> getUserList();
     String countUsers();
     String addUsers();
     Member findUser(String username);

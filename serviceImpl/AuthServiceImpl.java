@@ -57,9 +57,9 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public Member findUsers(String username) {
+    public List<?> findUsers(String username) {
         Member member = Member.builder().build();
-        return member;
+        return null;
     }
 
     @Override

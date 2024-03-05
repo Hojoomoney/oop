@@ -42,7 +42,7 @@ public class MemberController {
         System.out.println("검색할 아이디를 입력하세요");
         return memberService.findUser(scan.next());
     }
-    public List<Member> getUserList(){
+    public List<?> getUserList(){
         return memberService.getUserList();
     }
     public String countUsers(){
